@@ -1,4 +1,4 @@
-package uk.co.rpl.demo1.services;
+package uk.co.rpl.webdemo.services;
 
 import uk.co.rpl.webdemo.services.DemoAccessService;
 import java.io.IOException;

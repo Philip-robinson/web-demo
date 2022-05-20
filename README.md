@@ -20,7 +20,9 @@ $ java -jar web-demo*.jar
 ```
 ## Configuration
 
-Configuration is in the internal application.properties file
+Configuration is in the internal __application.properties__ file
 
 server.port is set to 8082
+
+It is assumed that api-demo will be available on http://localhost:8081
 

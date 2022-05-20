@@ -1,4 +1,4 @@
-package uk.co.rpl.demo1.controllers;
+package uk.co.rpl.webdemo.controllers;
 
 import uk.co.rpl.webdemo.controllers.HomeController;
 import org.junit.jupiter.api.Test;
