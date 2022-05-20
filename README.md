@@ -1,0 +1,26 @@
+# WEB DEMO
+
+This is a demonstration of a simple web interface using Thymeleaf that accesses data over an http api call to
+the project api-demo
+
+## Compile
+
+This is intended to be compiled using java 17 at a minimum
+
+```
+$ mvn clean install
+```
+
+## Run
+
+In the target directory
+
+```
+$ java -jar web-demo*.jar
+```
+## Configuration
+
+Configuration is in the internal application.properties file
+
+server.port is set to 8082
+
