@@ -20,8 +20,10 @@ public class HomeController {
         log.info("Got main user {}", user);
         model.addAttribute("name", user.getForename());
         model.addAttribute("lastName", user.getSurname());
-        var users = service.getAllUser();
+        var users = service.getAllUsers();
+        log.info("Got user list: {}", users);
         model.addAttribute("allUsers", users);
         return "home";
     }
+
 }

@@ -31,7 +31,7 @@ public class DemoAccessService {
         return user.getBody();
     }
 
-    public List<User> getAllUser(){
+    public List<User> getAllUsers(){
         try{
         var url = conf.getBase()+"/users";
         log.debug("Get all user calling url {}", url);
@@ -42,7 +42,7 @@ public class DemoAccessService {
         return users.getBody();
         } catch (URISyntaxException ex) {
             log.error("Failed to read users: {}", ex.getMessage());
-            throw new InternalError(ex.getMessage());
+            throw new RuntimeException(ex.getMessage());
         }
     }
 }

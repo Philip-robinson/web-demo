@@ -2,7 +2,6 @@ package uk.co.rpl.demo1.controllers;
 
 import uk.co.rpl.webdemo.controllers.HomeController;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -17,7 +16,7 @@ import uk.co.rpl.webdemo.services.DemoAccessService;
  *
  * @author philip
  */
-public class ControllerClassTest {
+public class HomeControllerTest {
     
     private MockMvc mvc;
 
