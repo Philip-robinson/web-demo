@@ -1,5 +1,6 @@
 package uk.co.rpl.demo1.controllers;
 
+import uk.co.rpl.webdemo.controllers.HomeController;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,8 +10,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import uk.co.rpl.demo1.User;
-import uk.co.rpl.demo1.services.DemoAccessService;
+import uk.co.rpl.webdemo.User;
+import uk.co.rpl.webdemo.services.DemoAccessService;
 
 /**
  *
@@ -20,7 +21,7 @@ public class ControllerClassTest {
     
     private MockMvc mvc;
 
-    private ControllerClass inst;
+    private HomeController inst;
     private DemoAccessService service;
 
     private static final String FIRST="first-name-gjjgjggj";
@@ -29,7 +30,7 @@ public class ControllerClassTest {
     @BeforeEach
     public void setUp() {
         service = mock(DemoAccessService.class);
-        inst = new ControllerClass(service);
+        inst = new HomeController(service);
         mvc = MockMvcBuilders.standaloneSetup(inst).
                 build();
     }

@@ -2,10 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Users</title>
+    <style>
+        td{
+            margin-left:10px
+        }
+        table{
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
-<div th:text="${name}">ssss</div>
-<div th:text="${lastName}">ssss</div>
+    <table>
+        <tr>
+            <td>Main users first name is</td>
+            <td th:text="${name}">ssss</td>
+        </tr>
+        <tr>
+            <td>Main users second name is</td>
+            <td th:text="${lastName}">ssss</td>
+        </tr>
+    </table>
+
+    <table>
+        <tr th:each="entry: ${allUsers}" style="">
+            <td th:text="${entry.forename}"></td>
+            <td th:text="${entry.surname}"></td>
+        </tr>
+    </table>
 </body>
 </html>

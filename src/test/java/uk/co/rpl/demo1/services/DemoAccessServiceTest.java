@@ -1,5 +1,6 @@
 package uk.co.rpl.demo1.services;
 
+import uk.co.rpl.webdemo.services.DemoAccessService;
 import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,7 +11,7 @@ import org.junit.jupiter.api.AfterEach;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import uk.co.rpl.demo1.Configurator;
+import uk.co.rpl.webdemo.Configurator;
 
 /**
  *

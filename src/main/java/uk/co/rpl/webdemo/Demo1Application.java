@@ -1,4 +1,4 @@
-package uk.co.rpl.demo1;
+package uk.co.rpl.webdemo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

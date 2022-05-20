@@ -1,4 +1,4 @@
-package uk.co.rpl.demo1;
+package uk.co.rpl.webdemo;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
