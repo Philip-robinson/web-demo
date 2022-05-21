@@ -9,7 +9,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import uk.co.rpl.webdemo.User;
+import uk.co.rpl.webdemo.dto.User;
 import uk.co.rpl.webdemo.services.DemoAccessService;
 
 /**

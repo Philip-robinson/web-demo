@@ -1,6 +1,5 @@
 package uk.co.rpl.webdemo.services;
 
-import uk.co.rpl.webdemo.services.DemoAccessService;
 import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

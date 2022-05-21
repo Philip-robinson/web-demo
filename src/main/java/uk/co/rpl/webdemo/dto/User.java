@@ -2,7 +2,7 @@
  * 
  * 
  */
-package uk.co.rpl.webdemo;
+package uk.co.rpl.webdemo.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
