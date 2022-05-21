@@ -58,8 +58,9 @@ Elements of note within the __home.html__ page are:
 ```
 <td th:text="${lastName}">ssss</td>
 ```
-ssss is replaced with the value lastName from __Model__, not that ssss is not special
-it is just that the value of the td elemnt is replaced.
+ssss is replaced with the value lastName from __Model__, not that __ssss__ is special,
+it is just that the value within the td elemnt is replaced by the value specified
+in the __th:text__ attribute.
 
 allUsers in the Model is a list, the html elemnts:
 ```
@@ -69,4 +70,24 @@ allUsers in the Model is a list, the html elemnts:
         </tr>
 ```
 are repeated once for each element in the __allUsers__ list from __Model__, each time setting the variable
-__entry__ to be the next value from the list, these are rendered in the td elements
+__entry__ to be the next value from the list, these are rendered in the td elements producing an output like:
+
+```
+       <tr style="">
+            <td>John</td>
+            <td>Smith</td>
+        </tr>
+        <tr style="">
+            <td>Mary</td>
+            <td>Jones</td>
+        </tr>
+        <tr style="">
+            <td>Jennifer</td>
+            <td>Eccles</td>
+        </tr>
+        <tr style="">
+            <td>Jack</td>
+            <td>Spratt</td>
+        </tr>
+ 
+```
