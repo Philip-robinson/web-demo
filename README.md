@@ -20,9 +20,99 @@ $ java -jar web-demo*.jar
 ```
 ## Configuration
 
-Configuration is in the internal __application.properties__ file
+Spring boot by default takes it's configuration from the file  __application.properties__ which,
+as in this case, can be on the classpath (taken from src/main/resources) or in the same directory
+the exeutable jar.
 
-server.port is set to 8082
+Configuration can be extended by marking a class with the __@Configuration__ annotation
+There is one Configuration class in this application __Configurator__, note that this also has
+the annotation __@PropertySource__ which allows configuration to be obtained from another file,
+in this case __extra.properties__ on the class path.
 
-It is assumed that api-demo will be available on http://localhost:8081
+Note that __application.properties__ is still read first, if there is a clash, that is both files
+contain the same property the one loaded latest will take presidence.
 
+In __application.properties__
+
+__server.port: 8002__ sets the server to listen on port 8082.
+
+This file also configures logging, see the __sectionLogging__.
+
+In __extra.properties__ the property 
+__api-conf-base: http://localhost:8081/api__ is used to define where the API
+is, this is read in __Configurator__ with the lines
+
+__@Value("${api-conf-base}")
+private String base;__
+
+Which says automatically set the value oif String __base__ to the property value of __api-conf-base__
+which as stated above is in the file __extra.properties__ though it could have been in __application.properties__.
+
+The __@Bean__ annotation on the method __getRestTmplate__ indicates to spring that 
+this should be the source of a RestTemplate bean (instantiated class) should it need to inject
+such into another bean it creates.
+
+## Logging
+
+
+## Controllers
+
+There is only 1 controller which is an end point for __/__, the method signature is:
+```
+public String start(Model model)
+```
+The String returned by this method is the name of an HTML template stored under
+__src/main/resources/tamplates__ with the file extension __.html__.
+
+Model is effectively a map of names to data, this is used to populate data onto the 
+HTML which is rendered by Thymeleaf.
+
+So this method calls the __DemoAccessService__ which obtains data via an api call, 
+the data returned is stored in __Model__.
+
+This method stores in a __name__, __lastName__ and __allUsers__ values in the __Model__
+and then returns the string __"home"__.
+
+The Spring mvc system will then lookup the file __src/main/resources/templates/_home_.html__
+and passes it to Thymeleaf for rendering.
+
+Thymeleaf modifies the html through attributes starting__th:__ added to elements.
+
+Elements of note within the __home.html__ page are:
+
+```
+<td th:text="${lastName}">ssss</td>
+```
+ssss is replaced with the value lastName from __Model__, not that __ssss__ is special,
+it is just that the value within the td elemnt is replaced by the value specified
+in the __th:text__ attribute.
+
+allUsers in the Model is a list, the html elemnts:
+```
+        <tr th:each="entry: ${allUsers}" style="">
+            <td th:text="${entry.forename}"></td>
+            <td th:text="${entry.surname}"></td>
+        </tr>
+```
+are repeated once for each element in the __allUsers__ list from __Model__, each time setting the variable
+__entry__ to be the next value from the list, these are rendered in the td elements producing an output like:
+
+```
+       <tr style="">
+            <td>John</td>
+            <td>Smith</td>
+        </tr>
+        <tr style="">
+            <td>Mary</td>
+            <td>Jones</td>
+        </tr>
+        <tr style="">
+            <td>Jennifer</td>
+            <td>Eccles</td>
+        </tr>
+        <tr style="">
+            <td>Jack</td>
+            <td>Spratt</td>
+        </tr>
+ 
+```
