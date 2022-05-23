@@ -53,7 +53,54 @@ this should be the source of a RestTemplate bean (instantiated class) should it 
 such into another bean it creates.
 
 ## Logging
+Logging uses __Slf4J__ which is a very commonly used logging system.
+System.out is very rarely used for logging and is considdered bad form.
+The various logging system that exist have the adventage that they canb be switched on and off via a
+configuration file and similarly various levels selected.
 
+So you can pick the single class you are worried about and display debug logging for that class but only log errors for the rest.
+
+It is configured in __application.properties__ using the lines
+```
+logging.level.root=info
+logging.level.uk.co.rpl=debug
+logging.pattern.console=%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger.%M - %msg%n
+```
+
+There are multiple logging __"Levels"__ __ERROR INFO WARN DEBUG TRACE__, this is an ordered list from most 
+catastrofic to least, if you pick a level then that level and anything more important is logged.
+
+In the configuration above, 
+```
+logging.level.root=info
+```
+means only log __INFO__ and __ERROR__ for but the line  
+```
+logging.level.uk.co.rpl=debug
+```
+Means that the package __uk.co.rpl__ should be logged for __ERROR INFO WARN__ and  __DEBUG__.
+
+Normally a class will contain a variable called log or similar with the line
+
+```
+private static final LOG = LoggingFactory.getLogger(ClassName.class);
+```
+
+This logger (LOG) can then be used to output messages
+
+```
+LOG.debug("The value of fred is {}", fred);
+```
+
+and similar.
+
+In this case the annotation __@Slf4j__ atomaticall generates the log creating line producing a variable called __log__.
+
+So we get:
+```
+log.debug("The value of fred is {}", fred);
+```
+This will send the message to the logging system replacing the {} with the value of fred generally by calling it;'s toString() method.
 
 ## Controllers
 
