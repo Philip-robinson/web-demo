@@ -54,8 +54,9 @@ such into another bean it creates.
 
 ## Logging
 Logging uses __Slf4J__ which is a very commonly used logging system.
-System.out is very rarely used for logging and is considdered bad form.
-The various logging system that exist have the adventage that they canb be switched on and off via a
+System.out is very rarely used for logging and is considered bad form.
+
+The various logging systems that exist have the adventage that they can be switched on and off via a
 configuration file and similarly various levels selected.
 
 So you can pick the single class you are worried about and display debug logging for that class but only log errors for the rest.
@@ -74,11 +75,14 @@ In the configuration above,
 ```
 logging.level.root=info
 ```
-means only log __INFO__ and __ERROR__ for but the line  
+means only log __INFO__ and __ERROR__, but the line  
 ```
 logging.level.uk.co.rpl=debug
 ```
 Means that the package __uk.co.rpl__ should be logged for __ERROR INFO WARN__ and  __DEBUG__.
+
+So any classes in or below the package __uk.co.rpl__ will be logged for  __ERROR INFO WARN__ and  __DEBUG__
+and any other classes (notably those in Spring itself in this case will only be logged for __ERROR__ and __INFO__.
 
 Normally a class will contain a variable called log or similar with the line
 
@@ -94,7 +98,7 @@ LOG.debug("The value of fred is {}", fred);
 
 and similar.
 
-In this case the annotation __@Slf4j__ atomaticall generates the log creating line producing a variable called __log__.
+In this case the annotation __@Slf4j__ automatically generates the log creating line producing a variable called __log__.
 
 So we get:
 ```
