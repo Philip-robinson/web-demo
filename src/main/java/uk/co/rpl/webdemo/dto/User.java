@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ *
+ *
  */
 package uk.co.rpl.webdemo.dto;
 

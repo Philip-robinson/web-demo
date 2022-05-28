@@ -28,6 +28,7 @@ public class DemoAccessService {
         var url = conf.getBase()+"/main-user";
         log.debug("Get main user calling url {}", url);
         var user = template.getForEntity(url, User.class);
+        log.debug("returned {}", user.getBody());
         return user.getBody();
     }
 
@@ -39,6 +40,7 @@ public class DemoAccessService {
                 new ParameterizedTypeReference<List<User>>(){};
         var req = new RequestEntity(HttpMethod.GET, new URI(url));
         var users = template.exchange(req, respType);
+        log.debug("returned {}", users.getBody());
         return users.getBody();
         } catch (URISyntaxException ex) {
             log.error("Failed to read users: {}", ex.getMessage());
