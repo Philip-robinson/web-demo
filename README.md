@@ -20,17 +20,20 @@ $ java -jar web-demo*.jar
 ```
 ## Configuration
 
-Spring boot by default takes it's configuration from the file  __application.properties__ which,
-as in this case, can be on the classpath (taken from src/main/resources) or in the same directory
+Spring boot by default takes it's configuration from the file
+__application.properties__ which, as in this case, can be on the
+classpath (taken from src/main/resources) or in the same directory
 the executable jar.
 
-Configuration can be extended by marking a class with the __@Configuration__ annotation
-There is one Configuration class in this application __Configurator__, note that this also has
-the annotation __@PropertySource__ which allows configuration to be obtained from another file,
+Configuration can be extended by marking a class with the
+__@Configuration__ annotation There is one Configuration class in
+this application __Configurator__, note that this also has the annotation
+__@PropertySource__ which allows configuration to be obtained from another file,
 in this case __extra.properties__ on the class path.
 
-Note that __application.properties__ is still read first, if there is a clash, that is both files
-contain the same property the one loaded latest will take presidence.
+Note that __application.properties__ is still read first,
+if there is a clash, that is both files contain the same property
+the one loaded latest will take presidence.
 
 In __application.properties__
 
@@ -45,34 +48,41 @@ is, this is read in __Configurator__ with the lines
 __@Value("${api-conf-base}")
 private String base;__
 
-Which says automatically set the value of String __base__ to the property value of __api-conf-base__
-which as stated above is in the file __extra.properties__ file though it could have been in __application.properties__.
+Which says automatically set the value of String __base__ to the property
+value of __api-conf-base__ which as stated above is in the file
+__extra.properties__ file though it could have been in __application.properties__.
 
 The __@Bean__ annotation on the method __getRestTmplate__ indicates to spring that 
-this should be the source of a RestTemplate bean (instantiated class) should it need to inject
-such into another bean it creates.
+this should be the source of a RestTemplate bean (instantiated class)
+should it need to inject such into another bean it creates.
 
-This would not be required if the RestTemplate class had a sinle constructor that Spring knew how to call. 
+This would not be required if the RestTemplate class had a sinle
+constructor that Spring knew how to call. 
 
 ## Logging
 Logging uses __Slf4J__ which is a very commonly used logging system.
 System.out is very rarely used for logging and is considered bad form.
 
-The various logging systems that exist have the adventage that they can be switched on and off via a
-configuration file and various levels of logging selected for different parts of an application.
+The various logging systems that exist have the adventage that they
+can be switched on and off via a configuration file and various levels
+of logging selected for different parts of an application.
 
-So, for instance, you can pick the single class you are worried about and display debug logging for that class but only log errors for the rest.
+So, for instance, you can pick the single class you are worried about
+and display debug logging for that class but only log errors for the rest.
 
 It is configured in __application.properties__ using the lines
+
 ```
 logging.level.root=info
 logging.level.uk.co.rpl=debug
 logging.pattern.console=%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger.%M - %msg%n
 ```
+
 The line starting __logging.pattern__ describes how data should be logged.
 
-There are multiple logging __"Levels"__ __ERROR INFO WARN DEBUG TRACE__, this is an ordered list from most 
-catastrofic to least, if you pick a level then that level and anything more important is logged.
+There are multiple logging __"Levels"__ __ERROR INFO WARN DEBUG TRACE__,
+this is an ordered list from most catastrofic to least, if you pick a level
+then that level and anything more important is logged.
 
 In the configuration above, 
 ```
@@ -82,10 +92,9 @@ means only log __INFO__ and __ERROR__, but the line
 ```
 logging.level.uk.co.rpl=debug
 ```
-Means that the package __uk.co.rpl__ should be logged for __ERROR INFO WARN__ and  __DEBUG__.
+Means that the package __uk.co.rpl__ should be logged for __ERROR INFO WARN__
+and  __DEBUG__.
 
-So any classes in or below the package __uk.co.rpl__ will be logged for  __ERROR INFO WARN__ and  __DEBUG__
-and any other classes (notably those in Spring itself) will only be logged for __ERROR__ and __INFO__.
 
 Normally a class will contain a variable called log or similar with the line
 
@@ -101,13 +110,15 @@ LOG.debug("The value of fred is {}", fred);
 
 and similar.
 
-In this case the annotation __@Slf4j__ automatically generates the log variable creating line producing a variable called __log__.
+In this case the annotation __@Slf4j__ automatically generates the log
+variable creating line producing a variable called __log__.
 
 So we get:
 ```
 log.debug("The value of fred is {}", fred);
 ```
-This will send the message to the logging system replacing the {} with the value of fred generally by calling it's toString() method.
+This will send the message to the logging system replacing the {} with the
+value of fred generally by calling it's toString() method.
 
 ## Controllers
 
@@ -127,7 +138,8 @@ the data returned is stored in __Model__.
 This method stores __name__, __lastName__ and __allUsers__ values in the __Model__
 and then returns the string __"home"__.
 
-The Spring mvc system will then lookup the file __src/main/resources/templates/_home_.html__
+The Spring mvc system will then lookup the file
+__src/main/resources/templates/_home_.html__
 and passes it to Thymeleaf for rendering.
 
 Thymeleaf modifies the html through attributes starting __th:__ added to elements.
@@ -139,7 +151,8 @@ Elements of note within the __home.html__ page are:
 ```
 ssss is replaced with the value lastName from __Model__, not that __ssss__ is special,
 it is just that the value within the td element is replaced by the value specified
-in the __th:text__ attribute.
+in the ivalue of __th:text__ attributei which by usoing the __${}__ annotation means 
+take from known variablesi, variables are mainly presented via the Model object.
 
 allUsers in the Model is a list, the html elemnts:
 ```
@@ -148,8 +161,9 @@ allUsers in the Model is a list, the html elemnts:
             <td th:text="${entry.surname}"></td>
         </tr>
 ```
-are repeated once for each element in the __allUsers__ list from __Model__, each time setting the variable
-__entry__ to be the next value from the list, these are rendered in the td elements producing an output like:
+are repeated once for each entry in the __allUsers__ list from __Model__,
+each time setting the variable __entry__ to be the next value from the list,
+these are rendered in the td elements producing an output like:
 
 ```
        <tr>
@@ -169,3 +183,6 @@ __entry__ to be the next value from the list, these are rendered in the td eleme
             <td>Spratt</td>
         </tr>
 ```
+
+
+
