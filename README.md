@@ -5,7 +5,7 @@ the project api-demo
 
 ## Compile
 
-This is intended to be compiled using java 17 at a minimum
+This is intended to be compiled using java 18 at a minimum
 
 ```
 $ mvn clean install
@@ -18,6 +18,16 @@ In the target directory
 ```
 $ java -jar web-demo*.jar
 ```
+Or just click __Run__ within your IDE.
+
+# The application
+
+The application is:-
+* Spring boot web application.
+* Output is rendeded to HTML using the Thymeleaf rendering engine.
+* It does not reference a database directly but calls database facilities via http API.
+
+
 ## Configuration
 
 Spring boot by default takes it's configuration from the file
